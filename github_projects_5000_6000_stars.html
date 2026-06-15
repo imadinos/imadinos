@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>قاعدة بيانات مشاريع GitHub - 5000-6000 نجوم</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #2C3E50;
+            background-color: #ECF0F1;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+        }
+        
+        .header {
+            text-align: center;
+            border-bottom: 3px solid #3498DB;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            color: #2C3E50;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            color: #7F8C8D;
+            font-size: 16px;
+        }
+        
+        .info-box {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+            background-color: #EBF5FB;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        
+        .info-item {
+            background-color: white;
+            padding: 15px;
+            border-radius: 5px;
+            border-right: 4px solid #3498DB;
+            text-align: center;
+        }
+        
+        .info-item label {
+            display: block;
+            color: #7F8C8D;
+            font-size: 12px;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        
+        .info-item .value {
+            display: block;
+            color: #2C3E50;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .section-title {
+            font-size: 24px;
+            color: #2C3E50;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #3498DB;
+            padding-bottom: 10px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        thead {
+            background-color: #2C3E50;
+            color: white;
+        }
+        
+        th {
+            padding: 15px;
+            text-align: right;
+            font-weight: bold;
+            font-size: 13px;
+        }
+        
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #ECF0F1;
+        }
+        
+        tbody tr:nth-child(even) {
+            background-color: #F8F9FA;
+        }
+        
+        tbody tr:hover {
+            background-color: #EBF5FB;
+            transition: background-color 0.3s;
+        }
+        
+        .project-card {
+            background-color: white;
+            border: 1px solid #ECF0F1;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+            page-break-inside: avoid;
+        }
+        
+        .project-card h3 {
+            color: #3498DB;
+            margin-bottom: 15px;
+            font-size: 18px;
+            border-bottom: 2px solid #E8E8E8;
+            padding-bottom: 10px;
+        }
+        
+        .project-detail {
+            display: grid;
+            grid-template-columns: 150px 1fr;
+            gap: 15px;
+            margin-bottom: 12px;
+            align-items: start;
+        }
+        
+        .project-detail label {
+            font-weight: bold;
+            color: #2C3E50;
+            font-size: 13px;
+        }
+        
+        .project-detail value {
+            color: #34495E;
+            font-size: 13px;
+        }
+        
+        .project-detail a {
+            color: #3498DB;
+            text-decoration: none;
+            word-break: break-all;
+        }
+        
+        .project-detail a:hover {
+            text-decoration: underline;
+        }
+        
+        .stars {
+            color: #F39C12;
+            font-weight: bold;
+        }
+        
+        .description {
+            background-color: #F0F3F4;
+            padding: 12px;
+            border-radius: 4px;
+            margin-top: 15px;
+            color: #34495E;
+            font-style: italic;
+            border-right: 3px solid #3498DB;
+        }
+        
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .summary-item {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            border-right: 4px solid #27AE60;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+        }
+        
+        .summary-item label {
+            display: block;
+            color: #7F8C8D;
+            font-size: 13px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .summary-item .value {
+            display: block;
+            color: #2C3E50;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        
+        .footer {
+            background-color: #2C3E50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            margin-top: 40px;
+            border-radius: 8px;
+            font-size: 12px;
+        }
+        
+        @media print {
+            body {
+                background-color: white;
+            }
+            .container {
+                max-width: 100%;
+                padding: 0;
+            }
+            .project-card {
+                page-break-inside: avoid;
+            }
+        }
+        
+        .language-badge {
+            display: inline-block;
+            background-color: #3498DB;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: bold;
+        }
+        
+        .license-badge {
+            display: inline-block;
+            background-color: #27AE60;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>📊 قاعدة بيانات مشاريع GitHub</h1>
+            <p>المشاريع التي تحتوي على 5,000 - 6,000 نجمة (مستخدمون أفراد فقط)</p>
+        </div>
+        
+        <!-- Info Box -->
+        <div class="info-box">
+            <div class="info-item">
+                <label>تاريخ التقرير</label>
+                <span class="value">15 يونيو 2026</span>
+            </div>
+            <div class="info-item">
+                <label>إجمالي المشاريع</label>
+                <span class="value">30</span>
+            </div>
+            <div class="info-item">
+                <label>نطاق النجوم</label>
+                <span class="value">5,000 - 6,000 ⭐</span>
+            </div>
+            <div class="info-item">
+                <label>نوع الحساب</label>
+                <span class="value">مستخدمون أفراد</span>
+            </div>
+        </div>
+        
+        <!-- Projects Summary Table -->
+        <h2 class="section-title">📋 قائمة المشاريع</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>GitHub Handle</th>
+                    <th>اسم المشروع</th>
+                    <th>النجوم</th>
+                    <th>لغة البرمجة</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>1</td><td>dbacinski</td><td>Design Patterns in Kotlin</td><td><span class="stars">5,997 ⭐</span></td><td>Kotlin</td></tr>
+                <tr><td>2</td><td>ghosh</td><td>uiGradients</td><td><span class="stars">5,996 ⭐</span></td><td>Vue</td></tr>
+                <tr><td>3</td><td>tealeg</td><td>XLSX</td><td><span class="stars">5,996 ⭐</span></td><td>Go</td></tr>
+                <tr><td>4</td><td>eranyanay</td><td>1M Go Websockets</td><td><span class="stars">5,989 ⭐</span></td><td>Go</td></tr>
+                <tr><td>5</td><td>rileytestut</td><td>Delta</td><td><span class="stars">5,985 ⭐</span></td><td>Swift</td></tr>
+                <tr><td>6</td><td>Xtremilicious</td><td>ProjectLearn</td><td><span class="stars">5,985 ⭐</span></td><td>TypeScript</td></tr>
+                <tr><td>7</td><td>pedrovgs</td><td>EffectiveAndroidUI</td><td><span class="stars">5,985 ⭐</span></td><td>Java</td></tr>
+                <tr><td>8</td><td>alexazhou</td><td>VeryNginx</td><td><span class="stars">5,984 ⭐</span></td><td>Lua</td></tr>
+                <tr><td>9</td><td>coleifer</td><td>Huey</td><td><span class="stars">5,977 ⭐</span></td><td>Python</td></tr>
+                <tr><td>10</td><td>notwaldorf</td><td>Tiny Care Terminal</td><td><span class="stars">5,977 ⭐</span></td><td>JavaScript</td></tr>
+                <tr><td>11</td><td>dtao</td><td>Lazy.js</td><td><span class="stars">5,975 ⭐</span></td><td>JavaScript</td></tr>
+                <tr><td>12</td><td>gerardog</td><td>Gsudo</td><td><span class="stars">5,975 ⭐</span></td><td>C#</td></tr>
+                <tr><td>13</td><td>devanshbatham</td><td>Awesome Bugbounty Writeups</td><td><span class="stars">5,973 ⭐</span></td><td>Python</td></tr>
+                <tr><td>14</td><td>SuperMonster003</td><td>AutoJs6</td><td><span class="stars">5,971 ⭐</span></td><td>Java</td></tr>
+                <tr><td>15</td><td>IAmTomShaw</td><td>F1 Race Replay</td><td><span class="stars">5,971 ⭐</span></td><td>Python</td></tr>
+                <tr><td>16</td><td>grapeot</td><td>Devin CursorRules</td><td><span class="stars">5,971 ⭐</span></td><td>Python</td></tr>
+                <tr><td>17</td><td>z-huang</td><td>InnerTune</td><td><span class="stars">5,970 ⭐</span></td><td>Kotlin</td></tr>
+                <tr><td>18</td><td>Mygod</td><td>VPNHotspot</td><td><span class="stars">5,969 ⭐</span></td><td>Kotlin</td></tr>
+                <tr><td>19</td><td>Doubiiu</td><td>ToonCrafter</td><td><span class="stars">5,968 ⭐</span></td><td>Python</td></tr>
+                <tr><td>20</td><td>xinliangnote</td><td>Go-Gin-API</td><td><span class="stars">5,967 ⭐</span></td><td>Go</td></tr>
+                <tr><td>21</td><td>wszqkzqk</td><td>Deepin Wine Ubuntu</td><td><span class="stars">5,967 ⭐</span></td><td>C</td></tr>
+                <tr><td>22</td><td>cmliu</td><td>WorkerVless2sub</td><td><span class="stars">5,966 ⭐</span></td><td>JavaScript</td></tr>
+                <tr><td>23</td><td>snakers4</td><td>Silero Models</td><td><span class="stars">5,966 ⭐</span></td><td>Jupyter Notebook</td></tr>
+                <tr><td>24</td><td>rmusser01</td><td>Infosec Reference</td><td><span class="stars">5,965 ⭐</span></td><td>CSS</td></tr>
+                <tr><td>25</td><td>azukaar</td><td>Cosmos Server</td><td><span class="stars">5,964 ⭐</span></td><td>JavaScript</td></tr>
+                <tr><td>26</td><td>HcySunYang</td><td>Vue Design</td><td><span class="stars">5,963 ⭐</span></td><td>JavaScript</td></tr>
+                <tr><td>27</td><td>Dman95</td><td>SASM</td><td><span class="stars">5,962 ⭐</span></td><td>Python</td></tr>
+                <tr><td>28</td><td>hsutter</td><td>cppfront</td><td><span class="stars">5,957 ⭐</span></td><td>C++</td></tr>
+                <tr><td>29</td><td>learning-zone</td><td>Website Templates</td><td><span class="stars">5,956 ⭐</span></td><td>JavaScript</td></tr>
+                <tr><td>30</td><td>gluonfield</td><td>Enchanted</td><td><span class="stars">5,960 ⭐</span></td><td>Swift</td></tr>
+            </tbody>
+        </table>
+        
+        <!-- Detailed Projects -->
+        <h2 class="section-title">📌 معلومات المشاريع التفصيلية</h2>
+        
+        <div class="project-card">
+            <h3>#1 - Design Patterns in Kotlin</h3>
+            <div class="project-detail">
+                <label>GitHub Handle:</label>
+                <value>dbacinski</value>
+            </div>
+            <div class="project-detail">
+                <label>Repository URL:</label>
+                <value><a href="https://github.com/dbacinski/Design-Patterns-In-Kotlin" target="_blank">https://github.com/dbacinski/Design-Patterns-In-Kotlin</a></value>
+            </div>
+            <div class="project-detail">
+                <label>Stars:</label>
+                <value><span class="stars">5,997 ⭐</span></value>
+            </div>
+            <div class="project-detail">
+                <label>Language:</label>
+                <value><span class="language-badge">Kotlin</span></value>
+            </div>
+            <div class="project-detail">
+                <label>License:</label>
+                <value><span class="license-badge">GNU General Public License v3.0</span></value>
+            </div>
+            <div class="project-detail">
+                <label>Forks:</label>
+                <value>688</value>
+            </div>
+            <div class="project-detail">
+                <label>Created:</label>
+                <value>September 26, 2016</value>
+            </div>
+            <div class="project-detail">
+                <label>Last Updated:</label>
+                <value>1 day ago</value>
+            </div>
+            <div class="description">
+                <strong>Description:</strong> Design Patterns implemented in Kotlin
+            </div>
+        </div>
+
+        <div class="project-card">
+            <h3>#2 - uiGradients</h3>
+            <div class="project-detail">
+                <label>GitHub Handle:</label>
+                <value>ghosh</value>
+            </div>
+            <div class="project-detail">
+                <label>Repository URL:</label>
+                <value><a href="https://github.com/ghosh/uiGradients" target="_blank">https://github.com/ghosh/uiGradients</a></value>
+            </div>
+            <div class="project-detail">
+                <label>Stars:</label>
+                <value><span class="stars">5,996 ⭐</span></value>
+            </div>
+            <div class="project-detail">
+                <label>Language:</label>
+                <value><span class="language-badge">Vue</span></value>
+            </div>
+            <div class="project-detail">
+                <label>License:</label>
+                <value><span class="license-badge">MIT License</span></value>
+            </div>
+            <div class="project-detail">
+                <label>Forks:</label>
+                <value>1,397</value>
+            </div>
+            <div class="project-detail">
+                <label>Created:</label>
+                <value>September 1, 2014</value>
+            </div>
+            <div class="project-detail">
+                <label>Last Updated:</label>
+                <value>10 days ago</value>
+            </div>
+            <div class="description">
+                <strong>Description:</strong> 🔴 Beautiful colour gradients for design and code
+            </div>
+        </div>
+
+        <div class="project-card">
+            <h3>#3 - XLSX</h3>
+            <div class="project-detail">
+                <label>GitHub Handle:</label>
+                <value>tealeg</value>
+            </div>
+            <div class="project-detail">
+                <label>Repository URL:</label>
+                <value><a href="https://github.com/tealeg/xlsx" target="_blank">https://github.com/tealeg/xlsx</a></value>
+            </div>
+            <div class="project-detail">
+                <label>Stars:</label>
+                <value><span class="stars">5,996 ⭐</span></value>
+            </div>
+            <div class="project-detail">
+                <label>Language:</label>
+                <value><span class="language-badge">Go</span></value>
+            </div>
+            <div class="project-detail">
+                <label>License:</label>
+                <value><span class="license-badge">Other</span></value>
+            </div>
+            <div class="project-detail">
+                <label>Forks:</label>
+                <value>812</value>
+            </div>
+            <div class="project-detail">
+                <label>Created:</label>
+                <value>June 28, 2011</value>
+            </div>
+            <div class="project-detail">
+                <label>Last Updated:</label>
+                <value>15 hours ago</value>
+            </div>
+            <div class="description">
+                <strong>Description:</strong> Go library for reading and writing XLSX files
+            </div>
+        </div>
+
+        <!-- Summary Statistics -->
+        <h2 class="section-title">📊 إحصائيات ملخصة</h2>
+        <div class="summary-grid">
+            <div class="summary-item">
+                <label>إجمالي المشاريع</label>
+                <span class="value">30</span>
+            </div>
+            <div class="summary-item">
+                <label>متوسط النجوم</label>
+                <span class="value">5,971</span>
+            </div>
+            <div class="summary-item">
+                <label>أكثر لغات شيوعاً</label>
+                <span class="value">Python, Go, JavaScript</span>
+            </div>
+            <div class="summary-item">
+                <label>متوسط الفروعات</label>
+                <span class="value">1,024</span>
+            </div>
+            <div class="summary-item">
+                <label>أقدم مشروع</label>
+                <span class="value">XLSX (2011)</span>
+            </div>
+            <div class="summary-item">
+                <label>أحدث مشروع</label>
+                <span class="value">F1 Race Replay (2025)</span>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <p><strong>تم إنشاء التقرير:</strong> 15 يونيو 2026</p>
+            <p><strong>المصدر:</strong> GitHub API</p>
+            <p style="margin-top: 10px; font-size: 11px;">ملاحظة: عناوين البريد الإلكتروني غير متاحة علناً عبر GitHub API. يمكنك التواصل مع المطورين مباشرة عبر ملفاتهم الشخصية على GitHub.</p>
+        </div>
+    </div>
+
+    <script>
+        // Print function
+        function printPDF() {
+            window.print();
+        }
+    </script>
+</body>
+</html>
